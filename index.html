@@ -18,27 +18,82 @@
     <![endif]-->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="static/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="static/bootstrap/js/bootstrap.min.js"></script>
 
     <style>
-    .h1 {
-      font-size:80px;
-      text-align:center;
+    .center
+    {
+      text-align: center;
+    }
+    .component
+    {
+      padding : 80px 0;
+      text-align : center;
+    }
+    .intro
+    {
+      color : white;
+      background-color: #040033;
+      min-height:60vh;
+    }
+    .info
+    {
+      background-color:#eff0f5;
+      min-height:60vh;
+    }
+    .title
+    {
+      font-size : 48px;
+    }
+    .logo
+    {
+      margin:auto;
+      height: 128px;
+      width: 128px;
+    }
+    #linkedin
+    {
+      background: url(static/assets/In-Black-66px-R.png) no-repeat center center;
+    }
+    #github
+    {
+      background: url(static/assets/GitHub-Mark-64px.png) no-repeat center center;
     }
     </style>
   </head>
 
   <body>
-    <div class="container-fluid">
-      <div class="jumbotron">
-        <h1>David Jensen</h1>
-        <p>
-          Welcome to my github page. It is currently under development.
+    <main class="component intro">
+      <div class="container">
+        <h1 class="page-header lead title">David Jensen</h1>
+        <p class="lead">
+          Welcome to my page.
         </p>
+      </div>
+    </main>
+    <div class="component info">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <a href="https://www.linkedin.com/in/davidcjensen/" class="thumbnail">
+              <div class="logo" id="linkedin"> </div>
+              <div class="caption">
+                <p class=lead> Visit my profile on LinkedIn. </p>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-6">
+            <a href="https://github.com/dcjensen" class="thumbnail">
+              <div class="logo" id="github"> </div>
+              <div class="caption">
+                <p class="lead"> Visit my profile on GitHub. </p>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </body>
-
 </html>
