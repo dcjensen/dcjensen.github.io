@@ -48,15 +48,16 @@
     }
     .navbar-custom
     {
+      display:block;
       background-color: black;
     }
 
-    .intro
+    #intro
     {
       color: white;
       background-color: #040033;
     }
-    .info
+    #pages
     {
       background-color: #eff0f5;
     }
@@ -86,16 +87,44 @@
     </style>
   </head>
 
-  <body>
-<!--    <nav class="navbar navbar-inverse navbar-custom navbar-fixed-top">
+  <body data-spy="scroll" data-target="#main-navbar">
+    <script>
+    // handle navbar spacing at top of page
+    $(window).resize(function () {
+      $('body').css('padding-top', parseInt($('#main-navbar').css("height")));
+    });
+
+    $(window).load(function () {
+      $('body').css('padding-top', parseInt($('#main-navbar').css("height")));
+    });
+    </script>
+    <nav class="navbar navbar-inverse navbar-custom navbar-fixed-top" id="main-navbar">
+      <!-- Add responsive collapsing for narrow viewports -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#site-navigation" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="site-navigation">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#intro">Intro<span class="sr-only">(current)</span></a></li>
+          <li class="active"><a href="#vacation">Vacation Photos</a></li>
+          <li class="active"><a href="#pages">External Pages</a></li>
+        </ul>
+      </div>
     </nav>
--->
-    <main class="component section intro">
+
+    <main class="component section" id="intro">
       <div class="container">
         <h1 class="page-header lead title">David Jensen</h1>
       </div>
     </main>
-    <div class="component section">
+
+    <div class="component section" id="vacation">
       <div class="container">
 
         <div id="vacation-carousel" class="carousel slide carousel-custom" data-ride="carousel" data-interval="false">
@@ -140,7 +169,8 @@
         </div>
       </div>
     </div>
-    <div class="component section info">
+
+    <div class="component section" id="pages">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
@@ -162,6 +192,7 @@
         </div>
       </div>
     </div>
+
     <div id="copyright">
       <div class="container">
         © David Jensen, 2017
