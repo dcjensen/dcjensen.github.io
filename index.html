@@ -65,7 +65,7 @@
       */
 
       function remove_hash() {
-        history.pushState("", document.title, window.location.pathname + window.location.search);
+        history.replaceState("", document.title, window.location.pathname + window.location.search);
       }
       var shift_window = function() {
         if (location.hash == "#pages") {
