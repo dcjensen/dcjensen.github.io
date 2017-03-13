@@ -67,7 +67,7 @@
       function remove_hash() {
         history.replaceState("", document.title, window.location.pathname + window.location.search);
       }
-      var shift_window = function() {
+      function shift_window() {
         if (location.hash == "#pages") {
           // this condition fixes navbar highlighting for the #pages link
           // when it is clicked from the navbar, or navigated to from the url bar
