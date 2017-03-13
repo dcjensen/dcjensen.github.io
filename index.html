@@ -32,6 +32,37 @@
       ga('send', 'pageview');
     </script>
 
+    <!-- NAVBAR RELATED STYLES AND JS -->
+    <style>
+      .navbar-custom
+      {
+        display:block;
+        background-color: black;
+      }
+      #navbar-placeholder {
+        height:50px;
+        /*
+           background-color is set here so the padding isn't visiable if the hight
+           alignment is off on some device have not seen this happen, but the
+           coloring should make the difference invisible [barring the slight delta
+           in observed size of the intro element] if it does
+        */
+        background-color: #040033;
+      }
+    </style>
+    <script>
+      /* Due to the navbar's height not being registered by the page, this js
+      adjusts the scroll position by 50px whenever the location is changed via a
+      link or whenever the page is loaded
+
+      Taken from: https://github.com/twbs/bootstrap/issues/1768
+      */
+      var shiftWindow = function() { scrollBy(0, -50) };
+      if (location.hash) shiftWindow();
+      window.addEventListener("hashchange", shiftWindow);
+    </script>
+
+    <!-- PAGE CONTENT STYLES -->
     <style>
     .center
     {
@@ -46,12 +77,6 @@
     {
       min-height: 60vh;
     }
-    .navbar-custom
-    {
-      display:block;
-      background-color: black;
-    }
-
     #intro
     {
       color: white;
@@ -85,19 +110,9 @@
       text-align: center;
     }
     </style>
+
   </head>
-
-  <body data-spy="scroll" data-target="#main-navbar">
-    <script>
-    // handle navbar spacing at top of page
-    $(window).resize(function () {
-      $('body').css('padding-top', parseInt($('#main-navbar').css("height")));
-    });
-
-    $(window).load(function () {
-      $('body').css('padding-top', parseInt($('#main-navbar').css("height")));
-    });
-    </script>
+  <body data-spy="scroll" data-target="#main-navbar" data-offset="50">
     <nav class="navbar navbar-inverse navbar-custom navbar-fixed-top" id="main-navbar">
       <!-- Add responsive collapsing for narrow viewports -->
       <div class="navbar-header">
@@ -117,6 +132,7 @@
         </ul>
       </div>
     </nav>
+    <div id="navbar-placeholder"></div>
 
     <main class="component section" id="intro">
       <div class="container">
