@@ -34,8 +34,7 @@
 
     <!-- NAVBAR RELATED STYLES AND JS -->
     <style>
-      .navbar-custom
-      {
+      .navbar-custom {
         display:block;
         background-color: black;
       }
@@ -54,65 +53,83 @@
       /* Due to the navbar's height not being registered by the page, this js
       adjusts the scroll position by 50px whenever the location is changed via a
       link or whenever the page is loaded
+      Adapted from: https://github.com/twbs/bootstrap/issues/1768
 
-      Taken from: https://github.com/twbs/bootstrap/issues/1768
+      The solution presented here almost works, except when the same navbar link
+      is clicked repeatedly without scrolling in-between. To avoid this, remove
+      current page hash from the browser url, e.g. index.html#pages -> index.html
+      Taken from: http://stackoverflow.com/questions/1397329/how-to-remove-the-hash-from-window-location-with-javascript-without-page-refresh/5298684#5298684
+
+      I also had to add a hack to handle the lowest link on the navbar, as highlighting
+      was broken in this case
       */
-      var shiftWindow = function() { scrollBy(0, -50) };
-      if (location.hash) shiftWindow();
-      window.addEventListener("hashchange", shiftWindow);
+
+      function remove_hash() {
+        history.pushState("", document.title, window.location.pathname + window.location.search);
+      }
+      var shift_window = function() {
+        if (location.hash == "#pages") {
+          // this condition fixes navbar highlighting for the #pages link
+          // when it is clicked from the navbar, or navigated to from the url bar
+          window.scrollTo(0,document.body.scrollHeight);
+          remove_hash();
+        }
+        else {
+          scrollBy(0, -50);
+          remove_hash();
+        }
+      };
+      if (location.hash) shift_window();
+      window.addEventListener("hashchange", shift_window);
     </script>
 
     <!-- PAGE CONTENT STYLES -->
     <style>
-    .center
-    {
+    .center {
       text-align: center;
     }
-    .component
-    {
+    .component {
       padding: 80px 0;
       text-align: center;
     }
-    .section
-    {
+    .section {
       min-height: 60vh;
     }
-    #intro
-    {
+    #intro {
       color: white;
       background-color: #040033;
     }
-    #pages
-    {
+    #pages {
       background-color: #eff0f5;
     }
-    .title
-    {
+    .title {
       font-size: 48px;
     }
-    .logo
-    {
+    .logo {
       margin: auto;
       height: 128px;
       width: 128px;
     }
-    #linkedin
-    {
+    #linkedin {
       background: url(static/assets/In-Black-66px-R.png) no-repeat center center;
     }
-    #github
-    {
+    #github {
       background: url(static/assets/GitHub-Mark-64px.png) no-repeat center center;
     }
-    #copyright
-    {
+    #copyright {
       background-color:#eff0f5;
       text-align: center;
     }
     </style>
 
   </head>
-  <body data-spy="scroll" data-target="#main-navbar" data-offset="50">
+  <!--
+  The data-offset here is set to 55 instead of 50 [ the navbar height] to help resolve
+  boundary conditions with the bootstrap scrollspy feature when following links [ without
+  it if you click a link a bunch, it might occasionaly highlight the navigation link prior
+  to the element the clicked link points to ]
+  -->
+  <body data-spy="scroll" data-target="#main-navbar" data-offset="55">
     <nav class="navbar navbar-inverse navbar-custom navbar-fixed-top" id="main-navbar">
       <!-- Add responsive collapsing for narrow viewports -->
       <div class="navbar-header">
