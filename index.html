@@ -30,6 +30,13 @@
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-93185909-1', 'auto');
       ga('send', 'pageview');
+
+      var trackOutboundLink = function(url) {
+        ga('send', 'event', 'outbound', 'click', url, {
+          'transport': 'beacon',
+          'hitCallback': function(){document.location = url;}
+        });
+      }
     </script>
 
     <!-- NAVBAR RELATED STYLES AND JS -->
@@ -207,7 +214,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <a href="https://www.linkedin.com/in/davidcjensen/" class="thumbnail">
+            <a href="https://www.linkedin.com/in/davidcjensen/" class="thumbnail" onclick="trackOutboundLink('https://www.linkedin.com/in/davidcjensen/'); return false;">
               <div class="logo" id="linkedin"> </div>
               <div class="caption">
                 <p class=lead> Visit my profile on LinkedIn. </p>
@@ -215,7 +222,7 @@
             </a>
           </div>
           <div class="col-md-6">
-            <a href="https://github.com/dcjensen" class="thumbnail">
+            <a href="https://github.com/dcjensen" class="thumbnail" onclick="trackOutboundLink('https://github.com/dcjensen'); return false;">
               <div class="logo" id="github"> </div>
               <div class="caption">
                 <p class="lead"> Visit my profile on GitHub. </p>
